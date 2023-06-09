@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TourPlanner_Client.Models;
+using TourPlanner_Client.ViewModels;
 
 namespace TourPlanner_Client.Views
 {
@@ -23,6 +26,10 @@ namespace TourPlanner_Client.Views
         public AddTourView()
         {
             InitializeComponent();
+            DataContext = new AddTourViewModel();
+            // TTypes.DataSource = Enum.GetNames(typeof(_TransportType)).ToString();
         }
+
+        
     }
 }
