@@ -11,36 +11,48 @@ namespace TourPlanner_Client.Models
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public List<TourLogs>? TourLogs { get; set; }
+        public List<TourLog> TourLogs { get; set; }
         public string Description { get; set; }
         public string Source { get; set; }
         public string Destination { get; set; }
-        public _TransportType Ttype { get; set; }
+        public TransportType Ttype { get; set; }
         public float Distance { get; set; }
-        public TimeOnly Estimate { get; set; }
-        public object Image { get; set; }           //Needs to be changed later according to MapQuest image
+        public int Estimate { get; set; }
+        public string ImageFileName { get; set; }
 
-        public Tour(string Name, string Description, string Source, string Destination, int ttype)
+
+        [NotMapped]
+        public string NewImage { get; set; }
+        [NotMapped]
+        public string ChildFriendlinessLabel { get; set; }
+        [NotMapped]
+        public int Popularity { get; set; }
+        [NotMapped]
+        public int ChildFriendliness { get; set; }
+        public Tour(string Name, string Description, string Source, string Destination, TransportType ttype)
         {
             Id = Guid.NewGuid();
             this.Name = Name;
             this.Description = Description;
             this.Source = Source;
             this.Destination = Destination;
-            TourLogs= new List<TourLogs>();
-            Ttype = (_TransportType)ttype;
-            Distance = 756;
-            Estimate = new TimeOnly(7,5,7);
-            Image = new object();
+            TourLogs = new List<TourLog>();
+            Ttype = ttype;
+            Distance = 0;
+            Estimate = 0;
+            ImageFileName = string.Empty;
+            NewImage = string.Empty;
         }
     }
 
-
-    public enum _TransportType
+    public enum TransportType
     {
+        [Description("pedestrian")]
         Hike,
-        Run,
-        Bike,
-        Vacation
+        [Description("fastest")]
+        Car,
+        [Description("bicycle")]
+        Bike
     }
 }
+
